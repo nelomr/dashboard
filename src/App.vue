@@ -3,38 +3,11 @@
     <v-app-bar app dark color="teal">
       <v-toolbar-title>Dashboard</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn>Home</v-btn>
-      <v-btn>Login</v-btn>
+      <v-btn text to="/">Home</v-btn>
+      <v-btn text to="/login">Login</v-btn>
     </v-app-bar>
     <v-main>
-      <v-card width="400" class="mx-auto mt-5">
-        <v-card-title>
-          <h1 class="display-1">Login</h1>
-        </v-card-title>
-        <v-card-text>
-          <v-form>
-            <v-text-field
-              name="Username"
-              label="Username"
-              prepend-icon="mdi-account-circle"
-            ></v-text-field>
-            <v-text-field
-              name="password"
-              label="password"
-              :type="showPassword ? 'text' : 'password'"
-              prepend-icon="mdi-lock"
-              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-              @click:append="showPass()"
-            ></v-text-field>
-            <v-divider></v-divider>
-            <v-card-actions>
-              <v-btn color="success">Register</v-btn>
-              <v-spacer></v-spacer>
-              <v-btn color="primary">Login</v-btn>
-            </v-card-actions>
-          </v-form>
-        </v-card-text>
-      </v-card>
+        <router-view></router-view>
     </v-main>
     <v-footer
       dark
@@ -77,20 +50,10 @@
 
 export default {
   name: 'App',
-
-  components: {
-  },
-
   data: () => ({
-    showPassword: false,
     icons: [
         {'icon':'mdi-linkedin', 'url': 'https://www.linkedin.com/in/nelomartinez'}
       ],
-  }),
-  methods: {
-    showPass() {
-      this.showPassword = !this.showPassword;
-    }
-  }
+  })
 };
 </script>

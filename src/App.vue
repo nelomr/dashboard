@@ -54,6 +54,10 @@ export default {
     icons: [
         {'icon':'mdi-linkedin', 'url': 'https://www.linkedin.com/in/nelomartinez'}
       ],
-  })
+  }),
+  beforeCreate() {
+    this.$store.dispatch('fetchUsers');
+    this.$store.dispatch('fetchProducts');
+  },
 };
 </script>

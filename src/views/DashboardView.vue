@@ -1,11 +1,15 @@
 <template>
   <v-container>
     <v-row class="text-center">
-      <v-col cols="12" md="6">
-        <h2>Users</h2>
+      <v-col cols="12" md="4">
+        <h2>Users with ApolloQuery</h2>
         <ApolloQuery :query="users">
           <template slot-scope="{ result: { loading, error, data } }">
-              <span v-if="loading">Loading...</span>
+              <v-progress-circular
+                v-if="loading"
+                indeterminate
+                color="teal"
+              ></v-progress-circular>
               <span v-else-if="error">An error occured</span>
               <template v-if="data">
                 <UsersTable :users="data.users" />
@@ -13,11 +17,24 @@
           </template>
         </ApolloQuery>
       </v-col>
-      <v-col cols="12" md="6">
+      <v-col cols="12" md="4">
+        <h2>Users with Vuex</h2>
+        <v-progress-circular
+          v-if="getUsers.length == 0"
+          indeterminate
+          color="teal"
+        ></v-progress-circular>
+        <UsersTable v-if="getUsers" :users="getUsers" />
+      </v-col>
+      <v-col cols="12" md="4">
         <h2>Products</h2>
         <ApolloQuery :query="products">
           <template slot-scope="{ result: { loading, error, data } }">
-              <span v-if="loading">Loading...</span>
+              <v-progress-circular
+                v-if="loading"
+                indeterminate
+                color="teal"
+              ></v-progress-circular>
               <span v-else-if="error">An error occured</span>
               <template v-if="data">
                 <ProductTable :products="data.products" />
@@ -55,6 +72,11 @@ import SalesChart from "../components/SalesChart";
       users: GET_USERS,
       sales,
       products: GET_PRODUCTS
+    }
+  },
+  computed: {
+    getUsers() {
+      return this.$store.state.users;
     }
   }
 }

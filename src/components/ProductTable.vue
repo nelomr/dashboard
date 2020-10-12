@@ -1,7 +1,7 @@
 <template>
   <v-data-table
-    :headers="employeesHeader"
-    :items="employees"
+    :headers="productsHeader"
+    :items="products"
     :items-per-page="5"
     :multiSort="true"
     class="elevation-1"
@@ -10,17 +10,18 @@
 
 <script>
 export default {
+  name: 'Products',
   props: {
-    employees: {
+    products: {
       type: Array,
       deafult: () =>([])
     }
   },
   computed: {
-    employeesHeader() {
+    productsHeader() {
       let hdrs = [];
-      for (const iterator in this.employees[0]) {
-        hdrs.push({text:iterator, value: iterator})
+      for (const product in this.products[0]) {
+        product !== '__typename' && hdrs.push({text:product, value: product})
       }
       return hdrs;
     }

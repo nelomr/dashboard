@@ -15,7 +15,7 @@
           Welcome to Dashboard
         </h1>
 
-        <v-btn dark to="/dashboard">Dashboard</v-btn>
+        <v-btn dark to="/">Dashboard</v-btn>
       </v-col>
 
     </v-row>

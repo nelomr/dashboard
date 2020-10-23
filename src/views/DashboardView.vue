@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row class="text-center">
       <v-col cols="12" md="4">
         <h2>Users with ApolloQuery</h2>
@@ -81,3 +81,10 @@ import SalesChart from "../components/SalesChart";
   }
 }
 </script>
+
+<style lang="postcss" scoped>
+  .container {
+    max-width: calc(100% - 56px);
+    margin-right: 0;
+  }
+</style>

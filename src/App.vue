@@ -1,12 +1,12 @@
 <template>
   <v-app>
     <v-app-bar app dark color="teal">
-      <v-toolbar-title>Dashboard</v-toolbar-title>
+      <v-toolbar-title text>Dashboard</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text to="/">Home</v-btn>
       <v-btn text to="/login">Login</v-btn>
     </v-app-bar>
     <v-main>
+        <MainMenu v-if="getPath" />
         <router-view></router-view>
     </v-main>
     <v-footer
@@ -18,26 +18,6 @@
         flat
         tile
       >
-        <v-card-title class="teal">
-          <strong class="subheading">Get connected</strong>
-
-          <v-spacer></v-spacer>
-
-          <v-btn
-            v-for="icon in icons"
-            :key="icon.icon"
-            class="mx-4"
-            dark
-            icon
-            :href="icon.url"
-            target="_blank"
-          >
-            <v-icon size="24px">
-              {{ icon.icon }}
-            </v-icon>
-          </v-btn>
-        </v-card-title>
-
         <v-card-text class="py-2 white--text text-center">
           {{ new Date().getFullYear() }} — <strong>Dashboard demo</strong>
         </v-card-text>
@@ -47,17 +27,27 @@
 </template>
 
 <script>
+import MainMenu from '@/components/MainMenu'
 
 export default {
   name: 'App',
   data: () => ({
     icons: [
         {'icon':'mdi-linkedin', 'url': 'https://www.linkedin.com/in/nelomartinez'}
-      ],
+      ]
   }),
+  components: {
+    MainMenu
+  },
   beforeCreate() {
     this.$store.dispatch('fetchUsers');
     this.$store.dispatch('fetchProducts');
   },
+  computed: {
+    getPath() {
+
+      return this.$parent._route.path === '/dashboard' || this.$parent._route.path === '/';
+    }
+  }
 };
 </script>
